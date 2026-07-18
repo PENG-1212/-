@@ -1,14 +1,16 @@
 # OKX Trading Bot Starter
 
-A small Python starter for a conservative OKX trading bot.
+A conservative Python starter for an OKX trading bot.
 
-## Features
+## What this version does
 
-- Loads credentials from environment variables
-- Uses `ccxt` to talk to OKX
-- Supports `dry run` by default
-- Includes a simple moving-average crossover signal
-- Includes basic risk controls
+- Reads OKX credentials from environment variables
+- Uses `ccxt` to talk to OKX spot markets
+- Defaults to dry-run mode
+- Uses SMA crossovers plus RSI filtering
+- Persists bot state locally in `bot_state.json`
+- Supports stop-loss and take-profit exits
+- Can send Telegram alerts
 
 ## Quick start
 
@@ -29,9 +31,16 @@ python okx_bot.py
 ## Safety defaults
 
 - Live trading is disabled unless `ALLOW_LIVE_TRADING=true`
-- The bot uses a small position fraction by default
-- If there is not enough balance, it will skip the trade
+- Dry-run remains on unless live trading is explicitly enabled
+- Position size is capped by `MAX_POSITION_USDT`
+- Exits are protected by `STOP_LOSS_PCT` and `TAKE_PROFIT_PCT`
+
+## Files
+
+- `okx_bot.py` — main bot loop
+- `bot_state.json` — local position/state file
+- `.env.example` — configuration template
 
 ## Notes
 
-This is a starter template, not a profit guarantee. Always test in dry-run mode first.
+This is a starter template, not a profit guarantee. Test in dry-run mode first, then use a small amount of capital if you decide to go live.
