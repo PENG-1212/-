@@ -11,6 +11,7 @@ A conservative Python starter for an OKX trading bot.
 - Persists bot state locally in `bot_state.json`
 - Supports stop-loss and take-profit exits
 - Can send Telegram alerts
+- Includes a Streamlit web dashboard for backtesting and signal viewing
 
 ## Quick start
 
@@ -22,7 +23,13 @@ pip install -r requirements.txt
 ```
 
 3. Copy `.env.example` to `.env` and fill in your values.
-4. Run the bot:
+4. Run the web dashboard:
+
+```bash
+streamlit run web_app.py
+```
+
+5. Run the bot loop separately if you want the polling trader:
 
 ```bash
 python okx_bot.py
@@ -34,9 +41,11 @@ python okx_bot.py
 - Dry-run remains on unless live trading is explicitly enabled
 - Position size is capped by `MAX_POSITION_USDT`
 - Exits are protected by `STOP_LOSS_PCT` and `TAKE_PROFIT_PCT`
+- The web dashboard is for analysis and backtesting, not custody
 
 ## Files
 
+- `web_app.py` — Streamlit dashboard
 - `okx_bot.py` — main bot loop
 - `bot_state.json` — local position/state file
 - `.env.example` — configuration template
