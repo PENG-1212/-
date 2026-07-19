@@ -1,0 +1,51 @@
+api_key: ""
+api_secret: ""
+exchange: "binance"
+testnet: true
+
+trading:
+  symbols:
+    - "BTC/USDT"
+    - "ETH/USDT"
+  timeframe: "1h"
+  quote_currency: "USDT"
+
+risk:
+  max_position_pct: 0.2        # 单币种最大仓位 20%
+  max_total_exposure: 0.8      # 总仓位上限 80%
+  max_loss_per_trade_pct: 0.02 # 单笔最大亏损 2%
+  max_daily_loss_pct: 0.05     # 日最大亏损 5%
+  stop_loss_pct: 0.05          # 止损 5%
+  take_profit_pct: 0.10        # 止盈 10%
+  trailing_stop: false
+
+strategies:
+  active: "ema_cross"          # 当前策略: ema_cross / macd / rsi / grid
+  ema_cross:
+    fast: 12
+    slow: 26
+    signal: 9
+  macd:
+    fast: 12
+    slow: 26
+    signal: 9
+  rsi:
+    period: 14
+    oversold: 30
+    overbought: 70
+  grid:
+    grid_count: 10
+    upper_price: 0             # 0 = 自动计算
+    lower_price: 0
+    order_size: 100
+
+notification:
+  telegram:
+    enabled: false
+    bot_token: ""
+    chat_id: ""
+
+backtest:
+  start_date: "2024-01-01"
+  end_date: "2024-12-31"
+  initial_capital: 10000
